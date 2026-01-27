@@ -43,12 +43,20 @@ export default function Home() {
               sugestões, elogios e críticas. Tome decisões baseadas em dados reais.
             </p>
             
-            <Link href="/login">
-              <Button>
-                Acessar Dashboard
-                <ArrowRight className="ml-1" />
-              </Button>
-            </Link>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/quem-somos">
+                <Button variant="muted">
+                  Quem somos
+                </Button>
+              </Link>
+
+              <Link href="/login">
+                <Button>
+                  Acessar Dashboard
+                  <ArrowRight className="ml-1" />
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
