@@ -452,17 +452,17 @@ export interface PieChartData {
 }
 
 const SENTIMENT_COLORS: Record<string, string> = {
-  positivo: '#1E5FA8',
-  neutro:   '#6B7280',
-  negativo: '#4B5563',
+  positivo: '#B2D8B2',
+  neutro:   '#D5D7DA',
+  negativo: '#FFADAD',
 };
 
 
 const CATEGORY_COLORS: Record<string, string> = {
-  elogio:     '#1E5FA8',
-  sugestao:   '#4A90D9',
-  problema:   '#6B7280',
-  reclamacao: '#4B5563', 
+  elogio:     '#B2D8B2',
+  sugestao:   '#A2D2FF',
+  problema:   '#FFADAD',
+  reclamacao: '#e7be8b', 
 };
 
 

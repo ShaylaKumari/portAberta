@@ -585,13 +585,7 @@ function MetricsGrid({ metrics, loading }: MetricsGridProps) {
       {metricCards.map(({ label, value, icon: Icon, trend, highlight, critical }) => (
         <Card
           key={label}
-          className={`border-0 shadow-sm ${
-            critical
-              ? 'bg-gradient-to-br from-red-50 to-red-100 border-red-200'
-              : highlight
-              ? ''
-              : ''
-          }`}
+          className={"border-0 shadow-sm"}
         >
           <CardContent className="pt-6">
             <div className="flex items-center justify-between mb-2">
