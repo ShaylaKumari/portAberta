@@ -45,8 +45,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const logout = useCallback(async () => {
-    await supabase.auth.signOut();
-    setUser(null);
+    try {
+      // 1. Avisa o Supabase para encerrar a sessão
+      await supabase.auth.signOut();
+      
+      // 2. Limpa o estado local IMEDIATAMENTE
+      setUser(null);
+      
+      // 3. Opcional: Limpa o storage manualmente para garantir
+      localStorage.clear(); 
+      
+      // 4. Redireciona usando o método do navegador para limpar o cache da memória
+      window.location.assign('/'); 
+    } catch (error) {
+      console.error("Erro no logout:", error);
+    }
   }, []);
 
   const contextValue: AuthContextType = {

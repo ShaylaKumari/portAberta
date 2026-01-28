@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { Popup } from "@typebot.io/react";
 import { Link } from 'wouter';
 import Header from '@/components/Header';
 import { Button } from '@/components/ui/button';
@@ -33,6 +35,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+
+
 
 const pillars = [
     {
@@ -102,6 +106,7 @@ const partners = [
 ];
 
 export default function QuemSomos() {
+  const [isTypebotOpen, setIsTypebotOpen] = useState(false);
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -415,11 +420,15 @@ export default function QuemSomos() {
             Comece a receber feedbacks anônimos hoje mesmo e tome decisões baseadas em dados reais 
             da sua equipe.
           </p>
-          <Link to="">
-            <Button size="lg" className="gap-2 text-base font-semibold px-8 py-6 shadow-lg">
-              Faça seu cadastro →
-            </Button>
-          </Link>
+          <Button size="lg" className="gap-2 text-base font-semibold px-8 py-6 shadow-lg" onClick={() => setIsTypebotOpen(true)}>
+            Faça seu cadastro →
+          </Button>
+          <Popup
+            typebot="porta-aberta-1c2pd9k"
+            isOpen={isTypebotOpen}
+            onClose={() => setIsTypebotOpen(false)}
+          />
+
         </div>
       </section>
 

@@ -10,6 +10,10 @@ interface HeaderProps {
 export default function Header({ showNav = true }: HeaderProps) {
   const { isAuthenticated, logout } = useAuth();
 
+  const handleLogout = () => {
+      logout(); // O contexto já cuida de tudo: signout, setUser(null) e redirect
+    };
+
   return (
     <header className="bg-white border-b border-border sticky top-0 z-50">
       <div className="container">
@@ -33,7 +37,7 @@ export default function Header({ showNav = true }: HeaderProps) {
             <nav className="flex items-center gap-4">
               {isAuthenticated ? (
                 <>
-                  <Button variant="ghost" size="sm" onClick={logout}>
+                  <Button variant="ghost" size="sm" onClick={handleLogout}>
                     <LogOut className="w-4 h-4 mr-2" />
                     Sair
                   </Button>
