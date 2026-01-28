@@ -28,15 +28,10 @@ import {
   Zap,
   HeartHandshake,
   Mail,
-  Send,
   Phone
 } from "lucide-react";
 
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-
-
+import { ContactForm } from "@/components/ContactForm";
 
 const pillars = [
     {
@@ -362,50 +357,7 @@ export default function QuemSomos() {
                 </div>
               </div>
             </div>
-
-            <Card className="border-border bg-card shadow-lg">
-              <CardContent className="p-8">
-                <form className="space-y-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="name">Nome</Label>
-                    <Input 
-                      id="name" 
-                      placeholder="Seu nome completo" 
-                      className="bg-background"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="email">E-mail</Label>
-                    <Input 
-                      id="email" 
-                      type="email" 
-                      placeholder="seu@email.com" 
-                      className="bg-background"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="company">Empresa</Label>
-                    <Input 
-                      id="company" 
-                      placeholder="Nome da sua empresa" 
-                      className="bg-background"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="message">Mensagem</Label>
-                    <Textarea 
-                      id="message" 
-                      placeholder="Como podemos ajudar você?" 
-                      className="bg-background min-h-[120px]"
-                    />
-                  </div>
-                  <Button type="submit" className="w-full gap-2 font-semibold">
-                    <Send className="w-4 h-4" />
-                    Enviar mensagem
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
+            <ContactForm />
           </div>
         </div>
       </section>
