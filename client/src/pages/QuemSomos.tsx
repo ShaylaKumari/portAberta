@@ -300,7 +300,7 @@ export default function QuemSomos() {
             </p>
           </div>
 
-          <div className="relative">
+          <div className="relative w-full overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]">
             <div className="flex animate-marquee gap-6 w-max pr-6">
               {[...partners, ...partners].map((partner, index) => (
                 <Card 
