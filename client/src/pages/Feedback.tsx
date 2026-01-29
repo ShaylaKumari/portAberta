@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRoute, Link, useLocation } from 'wouter';
-import { Info, Check } from 'lucide-react';
+import { Info, CheckCircle2 } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import { FeedbackForm } from '@/features/feedback/FeedbackForm';
 import { Card, CardContent } from '@/components/ui/card';
@@ -60,12 +60,12 @@ export default function Feedback() {
       <div className="min-h-screen flex items-center justify-center">
         <Card className="max-w-md text-center">
           <CardContent className="pt-12">
-            <Check className="w-10 h-10 mx-auto mb-4 text-primary" />
+            <CheckCircle2 className="w-10 h-10 mx-auto mb-4 text-primary" />
             <h2 className="text-2xl font-bold">Obrigado!</h2>
             <p className="text-muted-foreground mt-2">
               Seu feedback foi enviado de forma anônima.
             </p>
-            <Link href="/">
+            <Link href="/quem-somos">
               <Button className="mt-6">Conhecer o portAberta</Button>
             </Link>
           </CardContent>
