@@ -68,7 +68,7 @@ const coreValues = [
       icon: Users,
       title: "Diversidade e Inclusão",
       description: "Acreditamos que todas as vozes importam. Nossa plataforma foi pensada para acolher perspectivas de todos os perfis.",
-      highlights: ["Acessibilidade", "Múltiplos idiomas", "Design inclusivo"]
+      highlights: ["Acessibilidade", "Interface intuitiva", "Design inclusivo"]
     },
     {
       icon: MessageCircleHeart,
@@ -256,8 +256,8 @@ export default function QuemSomos() {
                   <div className="flex gap-5">
                     <div className="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold flex-shrink-0 shadow-md">1</div>
                     <div>
-                      <p className="font-bold text-foreground text-lg">Crie sua pesquisa</p>
-                      <p className="text-muted-foreground font-medium">Configure perguntas e temas relevantes para sua equipe</p>
+                      <p className="font-bold text-foreground text-lg">Acesse seu Dashboard</p>
+                      <p className="text-muted-foreground font-medium">Faça login e visualize seu painel exclusivo de gestão</p>
                     </div>
                   </div>
                   <div className="flex gap-5">
