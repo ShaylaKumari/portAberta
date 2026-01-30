@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { ManageAccessModal } from "@/components/ManageAccessModal";
 import {
   Select,
   SelectContent,
@@ -56,6 +57,7 @@ import {
   Loader2,
   ChevronDown,
   ChevronUp,
+  Users,
   X,
 } from 'lucide-react';
 import { toast } from 'sonner';
@@ -117,6 +119,7 @@ function DashboardContent() {
   const { company } = useCompany();
   const [feedbacksLimit, setFeedbacksLimit] = useState(INITIAL_FEEDBACKS_LIMIT);
   const [isExporting, setIsExporting] = useState(false);
+  const [isAccessModalOpen, setIsAccessModalOpen] = useState(false);
 
   const { filters, computedDateRange, hasActiveFilters, resetFilters } = useDashboardFilters();
 
@@ -178,7 +181,14 @@ function DashboardContent() {
             onBack={() => setLocation('/')}
             onExport={handleExportReport}
             isExporting={isExporting}
+            onManageAccess={() => setIsAccessModalOpen(true)}
           />
+
+        <ManageAccessModal 
+          open={isAccessModalOpen} 
+          onOpenChange={setIsAccessModalOpen} 
+          company_id={company.id}
+        />
 
           <PublicLinkCard link={feedbackLink} onCopy={handleCopyLink} />
 
@@ -224,9 +234,10 @@ interface DashboardHeaderProps {
   onBack: () => void;
   onExport: () => void;
   isExporting: boolean;
+  onManageAccess: () => void;
 }
 
-function DashboardHeader({ companyName, onBack, onExport, isExporting }: DashboardHeaderProps) {
+function DashboardHeader({ companyName, onBack, onExport, isExporting, onManageAccess }: DashboardHeaderProps) {
   return (
     <div className="mb-8">
       <div className="flex items-center gap-2 mb-2">
@@ -242,14 +253,20 @@ function DashboardHeader({ companyName, onBack, onExport, isExporting }: Dashboa
           <p className="text-muted-foreground mt-1">{companyName}</p>
         </div>
 
-        <Button onClick={onExport} variant="outline" size="sm" disabled={isExporting}>
-          {isExporting ? (
-            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-          ) : (
-            <Download className="w-4 h-4 mr-2" />
-          )}
-          Exportar Relatório
-        </Button>
+        <div className='flex gap-5'>
+          <Button variant="outline" className="gap-3" size="sm" onClick={onManageAccess}>
+              <Users className="w-4 h-4" />
+              Gerenciar acessos
+          </Button>
+          <Button onClick={onExport} variant="outline" size="sm" disabled={isExporting}>
+            {isExporting ? (
+              <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+            ) : (
+              <Download className="w-4 h-4 mr-2" />
+            )}
+            Exportar Relatório
+          </Button>
+        </div>
       </div>
     </div>
   );
