@@ -376,7 +376,7 @@ export default function QuemSomos() {
             Faça seu cadastro →
           </Button>
           <Popup
-            typebot="porta-aberta-1c2pd9k"
+            typebot="porta-aberta-emj29bm"
             isOpen={isTypebotOpen}
             onClose={() => setIsTypebotOpen(false)}
           />
