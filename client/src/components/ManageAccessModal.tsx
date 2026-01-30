@@ -137,7 +137,7 @@ export const ManageAccessModal = ({ open, onOpenChange, company_id }: ManageAcce
     const plans = [
     {
         name: "Essencial",
-        price: "R$ 49,90/mês",
+        price: "R$ 50,00/mês",
         description: "Ideal para pequenas equipes",
         features: [
         "Até 50 feedbacks/mês",
@@ -176,7 +176,7 @@ export const ManageAccessModal = ({ open, onOpenChange, company_id }: ManageAcce
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-lg w-[95vw]">
+      <DialogContent className="max-w-lg w-[95vw] max-h-[85vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="text-xl font-semibold flex items-center gap-2">
             <UserPlus className="w-5 h-5 text-primary" />
@@ -260,7 +260,7 @@ export const ManageAccessModal = ({ open, onOpenChange, company_id }: ManageAcce
           
           {isOwner ? (
             isLimitReached ? (
-            <div className="space-y-3">
+            <div className="space-y-3 flex flex-col">
               <div className="flex items-center gap-2 p-3 bg-amber-500/10 rounded-lg text-sm text-amber-600 dark:text-amber-400">
                 <AlertCircle className="w-4 h-4 flex-shrink-0" />
                 Você atingiu o limite de acessos do seu plano.
@@ -269,7 +269,7 @@ export const ManageAccessModal = ({ open, onOpenChange, company_id }: ManageAcce
                 {showPlans ? "Ocultar planos" : "Ver planos"}
               </Button>
                 {showPlans && (
-                <div className="mt-4 max-h-[400px] overflow-y-auto pr-2 pb-3 space-y-4">
+                <div className="mt-4 max-h-[400px] overflow-y-auto pr-2 space-y-4">
                     {plans.map((plan) => (
                     <div
                         key={plan.name}

@@ -296,7 +296,7 @@ export default function QuemSomos() {
               Nossos Parceiros
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Empresas que confiam na portAberta para transformar sua cultura organizacional.
+              Empresas que confiam no portAberta para transformar sua cultura organizacional.
             </p>
           </div>
 
