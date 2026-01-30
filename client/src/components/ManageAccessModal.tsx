@@ -140,8 +140,8 @@ export const ManageAccessModal = ({ open, onOpenChange, company_id }: ManageAcce
         price: "R$ 49,90/mês",
         description: "Ideal para pequenas equipes",
         features: [
-        "Até 100 feedbacks/mês",
-        "1 acesso ao dashboard"
+        "Até 50 feedbacks/mês",
+        "1 usuário com acesso ao dashboard"
         ],
     },
     {
@@ -149,8 +149,8 @@ export const ManageAccessModal = ({ open, onOpenChange, company_id }: ManageAcce
         price: "R$ 97,00/mês",
         description: "Para empresas em crescimento",
         features: [
-        "Feedbacks ilimitados",
-        "Até 3 acessos ao dashboard"
+        "Até 130 feedbacks/mês",
+        "Até 3 usuário com acesso ao dashboard"
         ],
     },
     {
@@ -158,9 +158,8 @@ export const ManageAccessModal = ({ open, onOpenChange, company_id }: ManageAcce
         price: "R$ 147,00/mês",
         description: "Para times estruturados",
         features: [
-        "Usuários ilimitados",
-        "Até 5 acessos ao dashboard",
-        "Suporte prioritário",
+        "Até 250 feedbacks/mês",
+        "Até 5 usuários com acesso ao dashboard",
         ],
     },
     {
@@ -168,9 +167,8 @@ export const ManageAccessModal = ({ open, onOpenChange, company_id }: ManageAcce
         price: "R$ 197,00/mês",
         description: "Para operações maiores",
         features: [
-        "Usuários ilimitados",
-        "Até 10 acessos ao dashboard",
-        "Suporte prioritário",
+        "Até 500 feedbacks/mês",
+        "Até 10 usuários com acesso ao dashboard",
         ],
     },
     ];
