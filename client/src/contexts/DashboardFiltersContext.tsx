@@ -1,9 +1,5 @@
 import { createContext, useContext, useState, useCallback, useMemo, ReactNode } from 'react';
 
-// ============================================================================
-// TIPOS E INTERFACES
-// ============================================================================
-
 export type PeriodPreset = '7' | '30' | '90' | 'custom';
 
 export interface DateRange {
@@ -12,22 +8,19 @@ export interface DateRange {
 }
 
 export interface DashboardFilters {
-  // Período
   periodPreset: PeriodPreset;
   dateRange: DateRange;
   
-  // Filtros múltiplos (arrays)
-  categories: string[];      // classified_type: elogio, sugestao, problema, reclamacao
-  criticalities: string[];   // criticality: alta, media, baixa
-  sentiments: string[];      // sentiment: positivo, neutro, negativo
-  themes: string[];          // main_theme
-  departments: string[];     // department (setor)
+  categories: string[];     
+  criticalities: string[]; 
+  sentiments: string[];   
+  themes: string[];        
+  departments: string[];     
 }
 
 export interface DashboardFiltersContextType {
   filters: DashboardFilters;
   
-  // Setters individuais
   setPeriodPreset: (preset: PeriodPreset) => void;
   setDateRange: (range: DateRange) => void;
   setCategories: (categories: string[]) => void;
@@ -36,24 +29,17 @@ export interface DashboardFiltersContextType {
   setThemes: (themes: string[]) => void;
   setDepartments: (departments: string[]) => void;
   
-  // Helpers
   toggleCategory: (category: string) => void;
   toggleCriticality: (criticality: string) => void;
   toggleSentiment: (sentiment: string) => void;
   toggleTheme: (theme: string) => void;
   toggleDepartment: (department: string) => void;
   
-  // Reset
   resetFilters: () => void;
   
-  // Computed
   computedDateRange: DateRange;
   hasActiveFilters: boolean;
 }
-
-// ============================================================================
-// CONSTANTES
-// ============================================================================
 
 export const CATEGORY_OPTIONS = [
   { value: 'elogio', label: 'Elogio' },
@@ -92,29 +78,17 @@ export const DEPARTMENT_OPTIONS = [
   { value: 'Outro', label: 'Outro' },
 ] as const;
 
-// ============================================================================
-// VALORES INICIAIS
-// ============================================================================
-
 const INITIAL_FILTERS: DashboardFilters = {
   periodPreset: '30',
   dateRange: { start: null, end: null },
-  categories: [],      // Vazio = Todos
-  criticalities: [],   // Vazio = Todos
-  sentiments: [],      // Vazio = Todos
-  themes: [],          // Vazio = Todos
-  departments: [],     // Vazio = Todos
+  categories: [],    
+  criticalities: [],   
+  sentiments: [],     
+  themes: [],         
+  departments: [],     
 };
 
-// ============================================================================
-// CONTEXTO
-// ============================================================================
-
 const DashboardFiltersContext = createContext<DashboardFiltersContextType | undefined>(undefined);
-
-// ============================================================================
-// HELPERS
-// ============================================================================
 
 function calculateDateFromPreset(preset: PeriodPreset): DateRange {
   if (preset === 'custom') {
@@ -139,10 +113,6 @@ function toggleArrayItem<T>(array: T[], item: T): T[] {
   return array.filter((_, i) => i !== index);
 }
 
-// ============================================================================
-// PROVIDER
-// ============================================================================
-
 interface DashboardFiltersProviderProps {
   children: ReactNode;
 }
@@ -150,7 +120,6 @@ interface DashboardFiltersProviderProps {
 export function DashboardFiltersProvider({ children }: DashboardFiltersProviderProps) {
   const [filters, setFilters] = useState<DashboardFilters>(INITIAL_FILTERS);
 
-  // Setters individuais
   const setPeriodPreset = useCallback((preset: PeriodPreset) => {
     setFilters(prev => ({
       ...prev,
@@ -187,7 +156,6 @@ export function DashboardFiltersProvider({ children }: DashboardFiltersProviderP
     setFilters(prev => ({ ...prev, departments }));
   }, []);
 
-  // Toggles
   const toggleCategory = useCallback((category: string) => {
     setFilters(prev => ({
       ...prev,
@@ -223,12 +191,10 @@ export function DashboardFiltersProvider({ children }: DashboardFiltersProviderP
     }));
   }, []);
 
-  // Reset
   const resetFilters = useCallback(() => {
     setFilters(INITIAL_FILTERS);
   }, []);
 
-  // Computed: data range efetiva
   const computedDateRange = useMemo<DateRange>(() => {
     if (filters.periodPreset === 'custom') {
       return filters.dateRange;
@@ -236,7 +202,6 @@ export function DashboardFiltersProvider({ children }: DashboardFiltersProviderP
     return calculateDateFromPreset(filters.periodPreset);
   }, [filters.periodPreset, filters.dateRange]);
 
-  // Computed: verifica se há filtros ativos
   const hasActiveFilters = useMemo(() => {
     return (
       filters.categories.length > 0 ||
@@ -273,10 +238,6 @@ export function DashboardFiltersProvider({ children }: DashboardFiltersProviderP
     </DashboardFiltersContext.Provider>
   );
 }
-
-// ============================================================================
-// HOOK
-// ============================================================================
 
 export function useDashboardFilters(): DashboardFiltersContextType {
   const context = useContext(DashboardFiltersContext);

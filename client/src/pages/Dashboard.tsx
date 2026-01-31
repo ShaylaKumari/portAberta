@@ -76,10 +76,6 @@ import {
   Legend,
 } from 'recharts';
 
-// ============================================================================
-// CONSTANTES
-// ============================================================================
-
 const INITIAL_FEEDBACKS_LIMIT = 5;
 const FEEDBACKS_INCREMENT = 3;
 
@@ -99,10 +95,6 @@ const CRITICALITY_COLORS = {
   media: '#FACC15',
   baixa: '#22C55E',
 } as const;
-
-// ============================================================================
-// COMPONENTE PRINCIPAL
-// ============================================================================
 
 export default function Dashboard() {
   return (
@@ -225,10 +217,6 @@ function DashboardContent() {
   );
 }
 
-// ============================================================================
-// HEADER
-// ============================================================================
-
 interface DashboardHeaderProps {
   companyName: string;
   onBack: () => void;
@@ -272,10 +260,6 @@ function DashboardHeader({ companyName, onBack, onExport, isExporting, onManageA
   );
 }
 
-// ============================================================================
-// LINK PÚBLICO
-// ============================================================================
-
 interface PublicLinkCardProps {
   link: string;
   onCopy: () => void;
@@ -304,10 +288,6 @@ function PublicLinkCard({ link, onCopy }: PublicLinkCardProps) {
     </Card>
   );
 }
-
-// ============================================================================
-// SEÇÃO DE FILTROS
-// ============================================================================
 
 interface FiltersSectionProps {
   hasActiveFilters: boolean;
@@ -556,10 +536,6 @@ function ActiveFilterTags() {
   );
 }
 
-// ============================================================================
-// GRID DE MÉTRICAS
-// ============================================================================
-
 interface MetricsGridProps {
   metrics: DashboardMetrics;
   loading: boolean;
@@ -645,10 +621,6 @@ function MetricsGrid({ metrics, loading }: MetricsGridProps) {
   );
 }
 
-// ============================================================================
-// SEÇÃO DE GRÁFICOS
-// ============================================================================
-
 interface ChartsSectionProps {
   timelineData: TimeSeriesDataPoint[];
   timelineLoading: boolean;
@@ -692,10 +664,6 @@ function ChartsSection({
     </div>
   );
 }
-
-// ============================================================================
-// GRÁFICO DE EVOLUÇÃO TEMPORAL
-// ============================================================================
 
 interface TimelineChartProps {
   data: TimeSeriesDataPoint[];
@@ -774,10 +742,6 @@ function TimelineChart({ data, loading, groupedByWeek }: TimelineChartProps) {
   );
 }
 
-// ============================================================================
-// GRÁFICO DE BARRAS - CRITICIDADE
-// ============================================================================
-
 interface CriticalityBarChartProps {
   data: CriticalityWeekData[];
   loading: boolean;
@@ -837,10 +801,6 @@ function CriticalityBarChart({ data, loading }: CriticalityBarChartProps) {
   );
 }
 
-// ============================================================================
-// GRÁFICO DE ROSCA - SENTIMENTO
-// ============================================================================
-
 interface SentimentPieChartProps {
   data: PieChartData[];
   loading: boolean;
@@ -899,10 +859,6 @@ function SentimentPieChart({ data, loading }: SentimentPieChartProps) {
   );
 }
 
-// ============================================================================
-// GRÁFICO DE ROSCA - CATEGORIA
-// ============================================================================
-
 interface CategoryPieChartProps {
   data: PieChartData[];
   loading: boolean;
@@ -960,10 +916,6 @@ function CategoryPieChart({ data, loading }: CategoryPieChartProps) {
     </Card>
   );
 }
-
-// ============================================================================
-// SEÇÃO DE FEEDBACKS RECENTES
-// ============================================================================
 
 interface RecentFeedbacksSectionProps {
   feedbacks: FilteredFeedback[];
@@ -1025,10 +977,6 @@ function RecentFeedbacksSection({
     </div>
   );
 }
-
-// ============================================================================
-// CARD DE FEEDBACK
-// ============================================================================
 
 interface FeedbackCardProps {
   feedback: FilteredFeedback;

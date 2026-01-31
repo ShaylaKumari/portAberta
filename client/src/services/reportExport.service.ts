@@ -1,9 +1,5 @@
 import { DashboardFilters, DateRange } from '@/contexts/DashboardFiltersContext';
 
-// ============================================================================
-// TIPOS
-// ============================================================================
-
 export interface ExportPayload {
   companySlug: string;
   companyName: string;
@@ -27,33 +23,8 @@ export interface ExportResult {
   error?: string;
 }
 
-// ============================================================================
-// CONFIGURAÇÃO
-// ============================================================================
-
-/**
- * URL do webhook do n8n para geração de relatórios
- * 
- * O workflow do n8n (WF02 - Relatório Semanal) foi projetado para execução agendada,
- * mas pode ser adaptado para receber requisições via webhook.
- * 
- * Para habilitar a exportação sob demanda, você precisa:
- * 1. Criar um novo workflow no n8n com um nó Webhook como trigger
- * 2. Copiar os nós de processamento do WF02 (Agregar Métricas, IA, HTML, PDF)
- * 3. Configurar o webhook para retornar o PDF como resposta
- * 
- * Exemplo de URL: https://n8n.seudominio.com.br/webhook/relatorio-dashboard
- */
 const N8N_WEBHOOK_URL = import.meta.env.VITE_N8N_WEBHOOK_URL || '';
 
-// ============================================================================
-// SERVIÇO DE EXPORTAÇÃO
-// ============================================================================
-
-/**
- * Exporta o relatório do dashboard enviando os filtros para o webhook do n8n
- * e aguarda o PDF como resposta
- */
 export async function exportDashboardReport(
   companySlug: string,
   companyName: string,
@@ -143,13 +114,6 @@ export async function exportDashboardReport(
   }
 }
 
-// ============================================================================
-// EXPORTAÇÃO LOCAL (FALLBACK)
-// ============================================================================
-
-/**
- * Gera um relatório simples localmente quando o webhook não está disponível
- */
 async function exportLocalReport(
   companySlug: string,
   companyName: string,
@@ -249,13 +213,6 @@ function generateLocalReportHtml(
   `.trim();
 }
 
-// ============================================================================
-// HELPERS DE DOWNLOAD
-// ============================================================================
-
-/**
- * Faz o download de um Blob como arquivo
- */
 function downloadBlob(blob: Blob, filename: string): void {
   const url = window.URL.createObjectURL(blob);
   const link = document.createElement('a');
@@ -267,9 +224,6 @@ function downloadBlob(blob: Blob, filename: string): void {
   window.URL.revokeObjectURL(url);
 }
 
-/**
- * Faz o download de um PDF a partir de uma URL
- */
 async function downloadPdfFromUrl(url: string, filename: string): Promise<void> {
   const response = await fetch(url);
   if (!response.ok) {
@@ -279,9 +233,6 @@ async function downloadPdfFromUrl(url: string, filename: string): Promise<void> 
   downloadBlob(blob, filename);
 }
 
-/**
- * Converte uma string base64 em Blob
- */
 function base64ToBlob(base64: string, mimeType: string): Blob {
   const byteCharacters = atob(base64);
   const byteNumbers = new Array(byteCharacters.length);
@@ -291,10 +242,6 @@ function base64ToBlob(base64: string, mimeType: string): Blob {
   const byteArray = new Uint8Array(byteNumbers);
   return new Blob([byteArray], { type: mimeType });
 }
-
-// ============================================================================
-// EXPORTAÇÃO ALTERNATIVA (CSV LOCAL)
-// ============================================================================
 
 export interface FeedbackForExport {
   id: string;
@@ -308,9 +255,6 @@ export interface FeedbackForExport {
   created_at: string;
 }
 
-/**
- * Exporta os feedbacks filtrados como CSV (alternativa local)
- */
 export function exportFeedbacksAsCsv(feedbacks: FeedbackForExport[], filename = 'feedbacks-portaberta.csv'): void {
   if (feedbacks.length === 0) {
     console.warn('Nenhum feedback para exportar');

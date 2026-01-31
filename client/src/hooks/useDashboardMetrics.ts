@@ -3,10 +3,6 @@ import { supabase } from '@/lib/supabase';
 import { useDashboardFilters, DashboardFilters, DateRange } from '@/contexts/DashboardFiltersContext';
 import { useCompany } from '@/hooks/useCompany';
 
-// ============================================================================
-// TIPOS E INTERFACES
-// ============================================================================
-
 export type Trend = 'up' | 'down' | 'stable';
 
 export interface DashboardMetrics {
@@ -31,10 +27,6 @@ interface FeedbackAnalysisRow {
   created_at: string;
 }
 
-// ============================================================================
-// CONSTANTES
-// ============================================================================
-
 const INITIAL_METRICS: DashboardMetrics = {
   totalFeedbacks: 0,
   positiveFeedbacks: 0,
@@ -45,13 +37,6 @@ const INITIAL_METRICS: DashboardMetrics = {
   criticalFeedbacks: 0,
 };
 
-// ============================================================================
-// HELPERS DE QUERY
-// ============================================================================
-
-/**
- * Aplica os filtros dinâmicos à query do Supabase
- */
 function applyFiltersToQuery(
   query: ReturnType<typeof supabase.from>,
   filters: DashboardFilters,
@@ -61,7 +46,6 @@ function applyFiltersToQuery(
   // Filtro obrigatório: empresa
   let filteredQuery = query.eq('company_slug', companySlug);
 
-  // Filtro de período
   if (dateRange.start) {
     filteredQuery = filteredQuery.gte('created_at', dateRange.start.toISOString());
   }
@@ -69,37 +53,28 @@ function applyFiltersToQuery(
     filteredQuery = filteredQuery.lte('created_at', dateRange.end.toISOString());
   }
 
-  // Filtro de categorias (classified_type)
   if (filters.categories.length > 0) {
     filteredQuery = filteredQuery.in('classified_type', filters.categories);
   }
 
-  // Filtro de criticidade
   if (filters.criticalities.length > 0) {
     filteredQuery = filteredQuery.in('criticality', filters.criticalities);
   }
 
-  // Filtro de sentimento
   if (filters.sentiments.length > 0) {
     filteredQuery = filteredQuery.in('sentiment', filters.sentiments);
   }
 
-  // Filtro de tema principal
   if (filters.themes.length > 0) {
     filteredQuery = filteredQuery.in('main_theme', filters.themes);
   }
 
-  // Filtro de departamento/setor
   if (filters.departments.length > 0) {
     filteredQuery = filteredQuery.in('department', filters.departments);
   }
 
   return filteredQuery;
 }
-
-// ============================================================================
-// HOOK PRINCIPAL
-// ============================================================================
 
 export function useDashboardMetrics() {
   const [data, setData] = useState<DashboardMetrics>(INITIAL_METRICS);
@@ -151,10 +126,6 @@ export function useDashboardMetrics() {
 
   return { data, loading, error, refetch: fetchMetrics };
 }
-
-// ============================================================================
-// CÁLCULO DE MÉTRICAS
-// ============================================================================
 
 function calculateMetricsFromRows(rows: FeedbackAnalysisRow[]): DashboardMetrics {
   const total = rows.length;
@@ -226,10 +197,6 @@ function calculatePositiveRate(rows: FeedbackAnalysisRow[]): number {
   const positiveCount = rows.filter(r => r.sentiment?.toLowerCase() === 'positivo').length;
   return (positiveCount / rows.length) * 100;
 }
-
-// ============================================================================
-// HOOK PARA DADOS DE GRÁFICOS - EVOLUÇÃO TEMPORAL
-// ============================================================================
 
 export interface TimeSeriesDataPoint {
   date: string;
@@ -355,10 +322,6 @@ function formatDayLabel(date: Date): string {
   return `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}`;
 }
 
-// ============================================================================
-// HOOK PARA GRÁFICO DE CRITICIDADE POR SEMANA
-// ============================================================================
-
 export interface CriticalityWeekData {
   week: string;
   label: string;
@@ -440,10 +403,6 @@ function aggregateCriticalityByWeek(
       criticos,
     }));
 }
-
-// ============================================================================
-// HOOK PARA GRÁFICOS DE ROSCA - SENTIMENTO E CATEGORIA
-// ============================================================================
 
 export interface PieChartData {
   name: string;
@@ -589,10 +548,6 @@ function calculateDistribution(
     .sort((a, b) => b.value - a.value);
 }
 
-// ============================================================================
-// HOOK PARA FEEDBACKS RECENTES COM FILTROS
-// ============================================================================
-
 export interface FilteredFeedback {
   id: string;
   company_slug: string;
@@ -688,10 +643,6 @@ export function useRecentFeedbacksFiltered(limit = 10) {
 
   return { feedbacks, hasMore, loading };
 }
-
-// ============================================================================
-// HOOK PARA LISTAR TEMAS DISPONÍVEIS (para o filtro)
-// ============================================================================
 
 export function useAvailableThemes() {
   const [themes, setThemes] = useState<string[]>([]);
