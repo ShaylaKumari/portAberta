@@ -14,13 +14,12 @@ import QuemSomos from "./pages/QuemSomos";
 function Router() {
   return (
     <Switch>
-      <Route path={"/"} component={Home} />
       <Route path={"/login"} component={Login} />
       <Route path={"/quem-somos"} component={QuemSomos} />
       <Route path={"/dashboard/:companySlug"} component={Dashboard} />
       <Route path={"/feedback/:companySlug"} component={Feedback} />
       <Route path={"/404"} component={NotFound} />
-      {/* Final fallback route */}
+      <Route path={"/"} component={Home} />
       <Route component={NotFound} />
     </Switch>
   );
